@@ -22,7 +22,7 @@ CORS(app)
 
 # For security should be changed to randomized key
 # but will reset session data if the server restarts often
-app.secret_key = "blog_server"
+app.secret_key = "blog_server_0001"
 
 app.register_blueprint(blog.blog_abtest, url_prefix="/blog")
 

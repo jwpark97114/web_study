@@ -5,8 +5,8 @@ MYSQL_HOST = "127.0.0.1"
 MYSQL_CONN = pymysql.connect(
     host=MYSQL_HOST,
     port=3306,
-    user="jwpark114",
-    passwd="nkf6435",
+    user="root",
+    passwd="n301k399f27",
     db="blog_db",
     charset="utf8",
 )
