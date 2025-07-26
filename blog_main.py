@@ -8,6 +8,7 @@ from flask_login import (
 )
 from flask_cors import CORS
 from blog_view import blog
+from blog_control.user_mgmt import User
 import os
 
 # https only things can be tested with http

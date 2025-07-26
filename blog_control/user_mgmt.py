@@ -15,9 +15,9 @@ class User(UserMixin):
     def get(user_id):
         mysql_db = conn_mysqldb()
         db_cursor = mysql_db.cursor()
-        sql = "SELECT * FROM user_info WHERE user_id = " + str(user_id) + ";"
+        sql = "SELECT * FROM user_info WHERE user_id = %s;"
         # print(sql)
-        db_cursor.execute(sql)
+        db_cursor.execute(sql, (str(user_id),))
         user = db_cursor.fetchone()
         if not user:
             return None
@@ -29,9 +29,10 @@ class User(UserMixin):
     def find(user_email):
         mysql_db = conn_mysqldb()
         db_cursor = mysql_db.cursor()
-        sql = "SELECT * FROM user_info WHERE user_id = " + str(user_email) + ";"
+        sql = "SELECT * FROM user_info WHERE user_email = %s"
+
         # print(sql)
-        db_cursor.execute(sql)
+        db_cursor.execute(sql, (str(user_email),))
         user = db_cursor.fetchone()
         if not user:
             return None
@@ -45,11 +46,14 @@ class User(UserMixin):
         if user == None:
             mysql_db = conn_mysqldb()
             db_cursor = mysql_db.cursor()
-            sql = "INSERT INTO user_info (USER_EMAIL, BLOG_ID) VALUES (%s, %s);" % (
-                str(user_email),
-                str(blog_id),
+            sql = "INSERT INTO user_info (USER_EMAIL, BLOG_ID) VALUES (%s, %s)"
+            db_cursor.execute(
+                sql,
+                (
+                    str(user_email),
+                    str(blog_id),
+                ),
             )
-            db_cursor.execute(sql)
             mysql_db.commit()
             return User.find(user_email)
         else:
